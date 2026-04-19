@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrés Bolaños — Desarrollador de Software</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #0e0f0d;
+    --ink2: #2a2b28;
+    --ink3: #5a5b58;
+    --paper: #f5f2eb;
+    --paper2: #ede9de;
+    --accent: #1a472a;
+    --accent2: #2d6a4f;
+    --gold: #c9a84c;
+    --gold2: #e8c97a;
+    --line: rgba(14,15,13,0.12);
+    --ff-display: 'Playfair Display', Georgia, serif;
+    --ff-body: 'DM Sans', sans-serif;
+    --ff-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--ff-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ---- NOISE TEXTURE ---- */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(245,242,235,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-logo {
+    font-family: var(--ff-display);
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent) !important;
+    color: var(--paper) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+  }
+
+  .nav-cta:hover { background: var(--accent2) !important; color: #fff !important; }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 5rem 5rem;
+    position: relative;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--ff-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--accent);
+  }
+
+  h1.hero-name {
+    font-family: var(--ff-display);
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  h1.hero-name .highlight {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .hero-role {
+    font-family: var(--ff-mono);
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    margin-bottom: 2rem;
+    margin-top: 0.8rem;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--ink3);
+    max-width: 480px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    font-family: var(--ff-body);
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .btn-primary:hover { background: var(--ink2); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+
+  .btn-outline:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .stat-num {
+    font-family: var(--ff-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--ink3);
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+  }
+
+  /* HERO RIGHT */
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent) 0%, #0a2e14 100%);
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 1px,
+      transparent 1px,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 1px,
+      transparent 1px,
+      transparent 20px
+    );
+  }
+
+  .hero-card {
+    position: relative;
+    z-index: 2;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 340px;
+    width: 90%;
+    backdrop-filter: blur(8px);
+  }
+
+  .hero-card-avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ff-display);
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-card h3 {
+    font-family: var(--ff-display);
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-card p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 1.5rem;
+  }
+
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pill {
+    font-family: var(--ff-mono);
+    font-size: 0.68rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .card-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ---- DECORATIVE LINE ---- */
+  .section-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-line::before {
+    content: '';
+    width: 36px; height: 2px;
+    background: var(--accent);
+  }
+
+  .section-tag {
+    font-family: var(--ff-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---- ABOUT ---- */
+  #sobre-mi {
+    padding: 8rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    position: relative;
+  }
+
+  #sobre-mi::before {
+    content: '"';
+    position: absolute;
+    top: 4rem; left: 3rem;
+    font-family: var(--ff-display);
+    font-size: 20rem;
+    color: var(--paper2);
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .about-left { position: relative; z-index: 1; }
+
+  .about-left h2 {
+    font-family: var(--ff-display);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-left h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .about-left p {
+    font-size: 1.05rem;
+    color: var(--ink3);
+    line-height: 1.85;
+    margin-bottom: 2rem;
+  }
+
+  .about-right { position: relative; z-index: 1; }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .expertise-item {
+    background: var(--paper2);
+    border-radius: 10px;
+    padding: 1.2rem;
+    border: 1px solid var(--line);
+  }
+
+  .expertise-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+
+  .expertise-item h4 {
+    font-family: var(--ff-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .expertise-item p {
+    font-size: 0.78rem;
+    color: var(--ink3);
+    line-height: 1.5;
+  }
+
+  /* ---- PROJECTS ---- */
+  #proyectos {
+    padding: 5rem 5rem 8rem;
+    background: var(--ink);
+  }
+
+  #proyectos .section-tag { color: var(--gold); }
+  #proyectos .section-line::before { background: var(--gold); }
+
+  #proyectos h2 {
+    font-family: var(--ff-display);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.8rem;
+  }
+
+  #proyectos > p {
+    color: rgba(245,242,235,0.5);
+    font-size: 1rem;
+    margin-bottom: 3.5rem;
+    max-width: 500px;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .project-card:first-child {
+    grid-column: span 2;
+    background: rgba(26,71,42,0.35);
+    border-color: rgba(201,168,76,0.25);
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.07);
+  }
+
+  .project-card:first-child:hover {
+    border-color: rgba(201,168,76,0.5);
+  }
+
+  .project-num {
+    font-family: var(--ff-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .project-card h3 {
+    font-family: var(--ff-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 0.8rem;
+    line-height: 1.25;
+  }
+
+  .project-card p {
+    font-size: 0.88rem;
+    color: rgba(245,242,235,0.55);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--ff-mono);
+    font-size: 0.68rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold2);
+    border: 1px solid rgba(201,168,76,0.3);
+  }
+
+  .project-badge.green {
+    background: rgba(26,71,42,0.5);
+    color: #86efac;
+    border-color: rgba(134,239,172,0.3);
+  }
+
+  .project-arrow {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    width: 32px; height: 32px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    transition: all 0.2s;
+  }
+
+  .project-card:hover .project-arrow {
+    background: var(--gold);
+    color: var(--ink);
+    border-color: var(--gold);
+  }
+
+  /* ---- CARTA DE PRESENTACION ---- */
+  #carta {
+    padding: 8rem 5rem;
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  #carta h2 {
+    font-family: var(--ff-display);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  #carta h2 em { font-style: italic; color: var(--accent); }
+
+  #carta > div:first-child p {
+    font-size: 0.95rem;
+    color: var(--ink3);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .letter-paper {
+    background: #fff;
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: 0 2px 60px rgba(0,0,0,0.08), 0 0 0 1px var(--line);
+    position: relative;
+  }
+
+  .letter-paper::before {
+    content: '';
+    position: absolute;
+    left: 2.5rem; top: 0; bottom: 0;
+    width: 1px;
+    background: #e8dcc8;
+  }
+
+  .letter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #ece6d9;
+  }
+
+  .letter-from h4 {
+    font-family: var(--ff-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .letter-from p {
+    font-size: 0.75rem;
+    color: var(--ink3);
+  }
+
+  .letter-date {
+    font-family: var(--ff-mono);
+    font-size: 0.72rem;
+    color: var(--ink3);
+    letter-spacing: 0.05em;
+  }
+
+  .letter-body p {
+    font-size: 0.92rem;
+    color: var(--ink2);
+    line-height: 1.85;
+    margin-bottom: 1.2rem;
+  }
+
+  .letter-sig {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #ece6d9;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .sig-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--ff-display);
+    font-size: 1rem;
+    font-weight: 900;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .sig-name {
+    font-family: var(--ff-display);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .sig-role {
+    font-size: 0.75rem;
+    color: var(--ink3);
+  }
+
+  /* ---- CONTACTO ---- */
+  #contacto {
+    padding: 6rem 5rem;
+    background: var(--accent);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contacto::before {
+    content: 'HABLEMOS';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--ff-display);
+    font-size: 14rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -0.05em;
+  }
+
+  #contacto h2 {
+    font-family: var(--ff-display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+
+  #contacto p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    position: relative;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1rem 2.5rem;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: var(--ff-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .contact-btn-wa {
+    background: #25D366;
+    color: #fff !important;
+  }
+  .contact-btn-wa:hover {
+    background: #1ebe5d;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--ink);
+    padding: 2.5rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .footer-logo {
+    font-family: var(--ff-display);
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--paper);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--gold); }
+
+  footer p {
+    font-size: 0.75rem;
+    color: rgba(245,242,235,0.35);
+    letter-spacing: 0.05em;
+  }
+
+  /* ---- FADE-IN ANIMATION ---- */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+  .fade-in-delay-4 { transition-delay: 0.4s; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 7rem 1.5rem 4rem; }
+    #sobre-mi { grid-template-columns: 1fr; padding: 5rem 1.5rem; gap: 3rem; }
+    #proyectos { padding: 5rem 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card:first-child { grid-column: span 1; }
+    #carta { grid-template-columns: 1fr; padding: 5rem 1.5rem; gap: 3rem; }
+    #contacto { padding: 5rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.8rem; text-align: center; }
+    #sobre-mi::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Desarrollando<span> Soluciones</span></a>
+  <ul class="nav-links">
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#contacto" class="nav-cta">Contactar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Disponible para proyectos</div>
+    <h1 class="hero-name">
+      Desarrollador<br>
+      de <span class="highlight">Software</span>
+    </h1>
+    <div class="hero-role">// Ingeniería de Sistemas · 7mo Semestre · Fundación Universitaria de Popayán</div>
+    <p class="hero-desc">
+      Creo herramientas tecnológicas que resuelven problemas reales: desde facturación legal ante la DIAN hasta el control de inventarios, rutas y producción agropecuaria.
+    </p>
+    <div class="hero-buttons">
+      <a href="#proyectos" class="btn btn-primary">Ver proyectos →</a>
+      <a href="#carta" class="btn btn-outline">Carta de presentación</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Sistemas desarrollados</div>
+      </div>
+      <div>
+        <div class="stat-num">1</div>
+        <div class="stat-label">Artículo científico</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Cumplimiento legal DIAN</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-pattern"></div>
+    <div class="hero-card">
+      <div class="hero-card-avatar">AB</div>
+      <h3>Andrés Felipe Bolaños Zúñiga</h3>
+      <p>Desarrollador Full-Stack · Colombia</p>
+      <div class="skill-pills">
+        <span class="pill">Python</span>
+        <span class="pill">Java</span>
+        <span class="pill">SQL</span>
+        <span class="pill">API REST</span>
+        <span class="pill">DIAN</span>
+        <span class="pill">IoT</span>
+        <span class="pill">Cloud</span>
+      </div>
+      <div class="card-status">
+        <span class="status-dot"></span>
+        Disponible para proyectos nuevos
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE MÍ -->
+<section id="sobre-mi">
+  <div class="about-left fade-in">
+    <div class="section-line"><span class="section-tag">Sobre mí</span></div>
+    <h2>Tecnología que<br>cuida su <em>negocio</em></h2>
+    <p>
+      Soy un desarrollador de software enfocado en crear herramientas que faciliten la gestión de los negocios. Como estudiante de 7mo semestre de Ingeniería de Sistemas en la Fundación Universitaria de Popayán, he dedicado mi formación a construir sistemas que resuelven problemas reales.
+    </p>
+    <p>
+      Mi objetivo es ofrecer tecnología robusta y profesional a empresas que buscan modernizarse y tener el control total de su información.
+    </p>
+    <a href="#proyectos" class="btn btn-primary" style="align-self: flex-start; margin-top: 0.5rem;">Explorar soluciones →</a>
+  </div>
+
+  <div class="about-right fade-in fade-in-delay-2">
+    <div class="expertise-grid">
+      <div class="expertise-item">
+        <span class="expertise-icon">🏭</span>
+        <h4>Sistemas de Inventario</h4>
+        <p>Control multi-bodega sincronizado con facturación electrónica.</p>
+      </div>
+      <div class="expertise-item">
+        <span class="expertise-icon">📑</span>
+        <h4>Facturación DIAN</h4>
+        <p>Integración legal, firmas digitales y envío automático de documentos.</p>
+      </div>
+      <div class="expertise-item">
+        <span class="expertise-icon">🌾</span>
+        <h4>Tecnología Agro</h4>
+        <p>Sensores IoT y análisis de datos para el sector agropecuario.</p>
+      </div>
+      <div class="expertise-item">
+        <span class="expertise-icon">🛒</span>
+        <h4>Comercio Digital</h4>
+        <p>Tiendas virtuales con catálogos y perfiles de precio personalizados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROYECTOS -->
+<section id="proyectos">
+  <div class="section-line"><span class="section-tag">Portafolio</span></div>
+  <h2 class="fade-in">Sistemas listos<br>para implementar</h2>
+  <p class="fade-in fade-in-delay-1">Soluciones desarrolladas y probadas, disponibles para su negocio.</p>
+
+  <div class="projects-grid">
+    <div class="project-card fade-in fade-in-delay-1">
+      <a href="https://digital.cic.gba.gob.ar/items/f9b4114d-d7c7-4f68-ac63-b781cd196d1a" target="_blank" class="project-arrow" title="Ver artículo publicado">↗</a>
+      <span class="project-num">01 / DESTACADO</span>
+      <h3>MilkFlow — Monitoreo Inteligente para el Sector Agro</h3>
+      <p>
+        Sistema que utiliza sensores IoT para vigilar la producción de leche las 24 horas. El programa analiza los datos y avisa al encargado antes de que ocurran problemas, optimizando el rendimiento de la finca.
+      </p>
+      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">
+        <span class="project-badge">📄 Artículo publicado — CIC Digital Argentina</span>
+        <a href="https://digital.cic.gba.gob.ar/items/f9b4114d-d7c7-4f68-ac63-b781cd196d1a" target="_blank" style="font-family:var(--ff-mono);font-size:0.65rem;color:var(--gold2);text-decoration:underline;letter-spacing:0.04em;">Ver publicación →</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-in fade-in-delay-2">
+      <div class="project-arrow">↗</div>
+      <span class="project-num">02</span>
+      <h3>Inventario & Factura Electrónica DIAN</h3>
+      <p>
+        Software completo para control de bodegas y emisión de facturas legales. Sistema multi-negocio: maneja múltiples sucursales desde una sola cuenta.
+      </p>
+      <span class="project-badge green">✓ Multi-empresa</span>
+    </div>
+
+    <div class="project-card fade-in fade-in-delay-1">
+      <div class="project-arrow">↗</div>
+      <span class="project-num">03</span>
+      <h3>API Conexión Directa DIAN</h3>
+      <p>
+        Tecnología para que cualquier programa se conecte con la DIAN automáticamente. Cumple todos los requisitos legales, firmas digitales y envío de documentos.
+      </p>
+      <span class="project-badge">🔗 Integración universal</span>
+    </div>
+
+    <div class="project-card fade-in fade-in-delay-2">
+      <div class="project-arrow">↗</div>
+      <span class="project-num">04</span>
+      <h3>Control de Rutas & Distribución</h3>
+      <p>
+        App para proteger la base de datos de negocios de distribución. Organiza rutas y guarda toda la información de clientes en la nube.
+      </p>
+      <span class="project-badge green">☁️ Nube segura</span>
+    </div>
+
+    <div class="project-card fade-in fade-in-delay-3">
+      <div class="project-arrow">↗</div>
+      <span class="project-num">05</span>
+      <h3>Tienda Virtual con Catálogos</h3>
+      <p>
+        Plataforma de ventas que organiza productos por grupos y asigna listas de precios especiales a cada tipo de comprador.
+      </p>
+      <span class="project-badge">🏪 E-commerce B2B</span>
+    </div>
+
+    <div class="project-card fade-in fade-in-delay-4">
+      <div class="project-arrow" style="border-color:rgba(201,168,76,0.4);">↗</div>
+      <span class="project-num">06 / COLABORATIVO</span>
+      <h3>Sistema de Gestión Escolar</h3>
+      <p>
+        Plataforma integral para la administración académica: gestión de estudiantes, registro de notas, control de asistencia y seguimiento de rendimiento académico por institución.
+      </p>
+      <div style="display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">
+        <span class="project-badge" style="background:rgba(201,168,76,0.12);color:var(--gold2);border-color:rgba(201,168,76,0.35);">⏳ Artículo académico — Próxima publicación</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CARTA DE PRESENTACIÓN -->
+<section id="carta">
+  <div class="fade-in">
+    <div class="section-line"><span class="section-tag">Carta de presentación</span></div>
+    <h2>Por qué elegir a<br><em>este desarrollador</em></h2>
+    <p style="color: var(--ink3); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem;">
+      Cada proyecto que desarrollo nace de una necesidad real. No vendo promesas, entrego sistemas funcionando.
+    </p>
+    <p style="color: var(--ink3); font-size: 0.95rem; line-height: 1.8;">
+      Mi enfoque es simple: entender el negocio, construir la herramienta correcta, e implementarla para que usted siempre tenga el control.
+    </p>
+  </div>
+
+  <div class="letter-paper fade-in fade-in-delay-2">
+    <div class="letter-header">
+      <div class="letter-from">
+        <h4>Andrés Felipe Bolaños Zúñiga — Desarrollador de Software</h4>
+        <p>Ingeniería de Sistemas · Colombia</p>
+      </div>
+      <div class="letter-date">Abril, 2025</div>
+    </div>
+
+    <div class="letter-body">
+      <p>Estimado cliente,</p>
+      <p>
+        Me dirijo a usted como desarrollador de software especializado en crear sistemas que resuelven problemas reales para empresas colombianas. A lo largo de mi formación como Ingeniero de Sistemas en la Fundación Universitaria de Popayán, he construido y puesto en marcha soluciones tecnológicas completas: desde la conexión directa con la DIAN para facturación electrónica, hasta sistemas de monitoreo agropecuario con sensores IoT y publicación científica.
+      </p>
+      <p>
+        Lo que me diferencia no es solo la capacidad técnica. Es el compromiso de entregar sistemas <strong>probados, legales y listos para funcionar</strong> desde el primer día. Mis soluciones multi-negocio permiten que usted maneje varias sucursales o empresas desde un solo lugar, protegiendo su información en la nube y eliminando la dependencia de procesos manuales.
+      </p>
+      <p>
+        ¿Su empresa necesita mejores herramientas para crecer? Estoy listo para implementar estas soluciones en su negocio y ayudarle a dar el siguiente paso tecnológico. Pongo a su disposición sistemas que cuidan su información y le ahorran tiempo.
+      </p>
+      <p><strong>¡Hablemos!</strong></p>
+    </div>
+
+    <div class="letter-sig">
+      <div class="sig-avatar">AB</div>
+      <div>
+        <div class="sig-name">Andrés Felipe Bolaños Zúñiga</div>
+        <div class="sig-role">Desarrollador de Software · Est. Ingeniería de Sistemas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <h2 class="fade-in">¿Hablamos?</h2>
+  <p class="fade-in fade-in-delay-1">
+    Su empresa merece tecnología que trabaje para usted. Escríbame por el canal que prefiera.
+  </p>
+  <div class="contact-email fade-in fade-in-delay-1" style="font-family:var(--ff-mono);font-size:0.8rem;color:rgba(255,255,255,0.55);letter-spacing:0.06em;margin-bottom:2rem;position:relative;">
+    a.granoble06@gmail.com
+  </div>
+  <div class="contact-options fade-in fade-in-delay-2" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;">
+    <a href="mailto:a.granoble06@gmail.com?subject=Consulta%20sobre%20desarrollo%20de%20software&body=Hola%20Andr%C3%A9s%2C%0A%0AMe%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20soluciones%20de%20software.%0A%0AMi%20consulta%20es%3A%20" 
+       class="contact-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+      Escribir por Correo
+    </a>
+    <a href="https://wa.me/573218294429?text=Hola%20Andr%C3%A9s%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20soluciones%20de%20software." 
+       target="_blank"
+       class="contact-btn contact-btn-wa">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.05 2.05C6.495 2.05 2 6.546 2 12.1c0 1.9.496 3.676 1.363 5.206L2 22l4.88-1.28A10.01 10.01 0 0 0 12.05 22c5.555 0 10.05-4.495 10.05-10.05S17.605 2.05 12.05 2.05zm0 18.3a8.234 8.234 0 0 1-4.196-1.146l-.3-.178-3.113.816.831-3.036-.196-.31A8.213 8.213 0 0 1 3.8 12.1c0-4.552 3.698-8.25 8.25-8.25s8.25 3.698 8.25 8.25-3.698 8.25-8.25 8.25z"/></svg>
+      Chatear por WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Andrés<span>.</span></a>
+  <p>© 2025 — Andrés Felipe Bolaños Zúñiga · Desarrollador de Software · Colombia</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
